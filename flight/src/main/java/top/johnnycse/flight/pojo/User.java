@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
-    private Integer user_id;
-    private String  username;
+    private Integer userId;
+    private String  userName;
     @JsonIgnore
     private String password;
     private Integer type;

@@ -14,6 +14,16 @@ public class api {
         return HashMap;
     }
 
+    public static Map<String,Object> successCookie(Object message,String Cookie){
+        Map<String, Object> HashMap = new HashMap<>();
+        HashMap.put("code",200);
+        HashMap.put("message","ok");
+        HashMap.put("result",message);
+        HashMap.put("type","success");
+        HashMap.put("cookie",Cookie);
+        return HashMap;
+    }
+
     public static Map<String,Object> successSetToken(String token){
         Map<String, Object> HashMap = new HashMap<>();
         HashMap.put("code",200);

@@ -1,5 +1,7 @@
 package top.johnnycse.flight.utils;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
@@ -14,10 +16,12 @@ public class TokenByRedisUtil {
     @Autowired
     private StringRedisTemplate redisTemplate;
 
+    private final static Logger log = LoggerFactory.getLogger(TokenByRedisUtil.class);
+
     public String setToken(String userId){
         String token = UUID.randomUUID().toString();
         redisTemplate.opsForValue().set(userId, token, 30, TimeUnit.MINUTES);
-        System.out.println("set的token"+token);
+        log.info("set的token"+token);
         return token;
     }
 

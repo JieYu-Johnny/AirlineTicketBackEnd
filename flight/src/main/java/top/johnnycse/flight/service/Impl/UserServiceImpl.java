@@ -2,6 +2,7 @@ package top.johnnycse.flight.service.Impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.stereotype.Service;
 import top.johnnycse.flight.mapper.UserMapper;
 import top.johnnycse.flight.pojo.User;
 import top.johnnycse.flight.service.UserService;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 
+@Service
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserMapper userMapper;
@@ -19,21 +21,10 @@ public class UserServiceImpl implements UserService {
     private StringRedisTemplate redisTemplate;
 
     @Override
-    public Integer getUserId(User user) {
-        return user.getUser_id();
-    }
-
-    @Override
-    public String getUserName(User user) {
-        return user == null ? null : user.getUsername();
-    }
-
-
-    @Override
     public User getUserById(Integer Id) {
         if (Id == null)
             return null;
-        return userMapper.GetUserById(Id);
+        return userMapper.getUserInfoById(Id);
     }
 
     @Override
@@ -42,7 +33,7 @@ public class UserServiceImpl implements UserService {
         Cookie[] cookies = request.getCookies();
         if(cookies != null && cookies.length > 0){
             for (Cookie cookie : cookies){
-                if(cookie.getName().equals("token")){
+                if(cookie.getName().equals("cookie")){
                     token = cookie.getValue();
                 }
             }
@@ -56,4 +47,6 @@ public class UserServiceImpl implements UserService {
             }
         }else return api.error("未登录");
     }
+
+
 }

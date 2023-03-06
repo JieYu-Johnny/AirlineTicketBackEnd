@@ -12,7 +12,6 @@ import java.util.Map;
 
 
 @Data
-
 @NoArgsConstructor
 @AllArgsConstructor
 public class Seat implements Serializable {
